@@ -1,0 +1,7 @@
+<div class="form-group msg-form" data-controller="reset-form" data-action = "turbo:submit-end->reset-form#reset">
+  <%= form_with(model: [@single_room ,@message], remote: true, class: "d-flex") do |f| %>
+    <%= f.text_field :content, id: 'chat-text', class: "form-control-lg msg-content", autocomplete: 'off' ,placeholder: "Say something...",style:"width:75%"%>
+    <%= f.submit "Send" ,data: { disable_with: false }  ,class: "btn btn-outline-secondary",style:"width:7%" %>
+  <% end %>
+</div>
+

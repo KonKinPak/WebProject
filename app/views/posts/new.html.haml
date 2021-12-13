@@ -1,0 +1,16 @@
+- flash.each do |type, msg|
+	.alert.alert-info.alert-dismissible.fade.show{:style => "z-index:9999;"}
+		= msg
+		%button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+.row
+	.col-3.position-fixed.border-end.border-2
+		= render '/nav2'
+	.col-6.offset-3.ps-5
+		.container
+			%br
+			%br
+			%br
+			%h1 New post
+				
+			= render 'form'
+			= button_to "back", request.referrer , method: :get,class:"btn btn-light mt-3"

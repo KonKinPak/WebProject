@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+#Approve user like post
+one:
+  id: 1
+  user_id: 1
+  post_id: 1
+
+#Approve user like comment
+two:
+  id: 2
+  user_id: 1
+  comment_id: 1

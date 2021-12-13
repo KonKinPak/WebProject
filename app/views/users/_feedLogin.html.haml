@@ -1,0 +1,24 @@
+- flash.each do |type, msg|
+  .alert.alert-info.alert-dismissible.fade.show{:style => "z-index:9999;"}
+    = msg
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+
+.row
+  .col-3.position-fixed.border-end.border-2
+    = render '/nav2'
+
+  .col-7.offset-3.ps-5.pe-5
+    .container
+      %nav.mt-3
+        #nav-tab.nav.nav-tabs{:role => "tablist"}
+          %button#nav-home-tab.nav-link.active{"aria-controls" => "nav-home", "aria-selected" => "true", "data-bs-target" => "#nav-home", "data-bs-toggle" => "tab", :role => "tab", :type => "button",:style =>"font-size:20px"} Feed
+          %button#nav-profile-tab.nav-link{"aria-controls" => "nav-profile", "aria-selected" => "false", "data-bs-target" => "#nav-profile", "data-bs-toggle" => "tab", :role => "tab", :type => "button",:style =>"font-size:20px"} Following
+      #nav-tabContent.tab-content
+        #nav-home.tab-pane.fade.show.active{"aria-labelledby" => "nav-home-tab", :role => "tabpanel"}
+          = render 'posts2'
+        #nav-profile.tab-pane.fade{"aria-labelledby" => "nav-profile-tab", :role => "tabpanel"}
+          = render 'postsFollow'  
+
+  .col-2.offset-10.position-fixed.border-start.border-2
+    = render 'profilebar'
+

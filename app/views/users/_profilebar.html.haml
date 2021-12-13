@@ -1,0 +1,31 @@
+.nav.flex-column.flex-nowrap.vh-100.overflow-auto.text-white.p-2
+  .container-fluid.d-flex.flex-column.align-items-center
+    %a.navbar-brand.ms-5{:href => "/profile/#{@user.nickname}"}
+      - if @user.avatar.attached?
+        = image_tag(@user.avatar,:class => "rounded-circle mb-4 mt-5",:style => "width:200px;height:200px; overflow-y:hidden")
+      - else
+        %img.rounded-circle.mb-4.mt-5{:alt => "default avatar",:src =>image_path("default_avatar.png"),:style => "width:200px;height:200px; overflow-y:hidden"}      
+    .d-flex.flex-column.align-items-start
+      %a.navbar-brand.mt-3{:href => "/profile/#{@user.nickname}"}
+        .d-flex.align-items-center
+          %img.me-3{:alt => "profile icon", :height => "35px", :src => image_path("profile_icon.png"), :width => "35px"}
+          %h2.display-6
+            =@user.nickname
+      %ul.nav.navbar-nav
+        %li.nav-item
+          %p.navbar-text.fs-4{:style => "color: black"}
+            = pluralize(@user.followers.count,"follower")
+      -if(session[:user_id] == @user.id)
+        .dropdown
+          %button#dropdownMenuButton1.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :type => "button"}
+            Account Settings
+          %ul.dropdown-menu{"aria-labelledby" => "dropdownMenuButton1"}
+            %li
+              %a.dropdown-item{:href => edit_user_path(@user)} Edit User
+            %li
+              %a.dropdown-item{:href => main_path} Logout
+      -else
+        - if @self_user.followees.include?(@user)
+          = button_to "Unfollow", "/profile/#{@user.nickname}/unfollow" , method: "POST",class:"btn btn-secondary "
+        - else
+          = button_to "Follow", "/profile/#{@user.nickname}/follow" , method: "POST" ,class:"btn btn-primary"

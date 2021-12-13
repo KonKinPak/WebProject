@@ -1,0 +1,61 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1{
+    font-size: 50px !important;
+    text-decoration: underline;
+}
+p{
+    font-size: 28px;
+}
+a:hover{
+    background-color: transparent;   
+}
+ul {
+  list-style-type: none !important;
+}
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.header{
+    width: auto;
+    height: 400px;
+}
+.header-content{
+    padding-left: 10px;
+
+}
+.email{
+  width: 50px;
+  height: 100%;
+  /*background: url(https://cdn-icons.flaticon.com/png/512/3059/premium/3059474.png?token=exp=1638972291~hmac=8f413789b0fff33b0b3a3949bbb1f85d)no-repeat;
+  */
+  background-size: contain;
+  display: inline-block;
+}
+
+.alert.alert-server.alert-fixed.alert-info {
+  margin-bottom: 0 !important;
+  border-radius: 0 !important;
+  z-index: 9999 !important;
+}

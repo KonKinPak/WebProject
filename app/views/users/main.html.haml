@@ -1,0 +1,20 @@
+- flash.each do |type, msg|
+  .alert.alert-danger.alert-dismissible.fade.show{:style => "z-index:9999;"}
+    = msg
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+
+.main
+  .card
+    .card-body
+      = form_with do |form|
+        .field.mb-3
+          = form.label :username,"Username : ",{ class: "form-label display-6"}
+          = form.text_field :username, { class: "form-control-lg w-75 m-4", placeholder: "Username"}
+        .field.mb-3
+          = form.label :password ,"Password : ",{ class: "form-label display-6"}
+          = form.password_field :password ,{ class: "form-control-lg w-75 m-4", placeholder: "Password"}
+        .row
+          .col
+            = button_to "Log in" , "/main" ,class:"btn btn-primary ms-3 main-btn"
+          .col
+            = button_to "Register" , "/register",class:"btn btn-secondary ms-3 main-btn",method: "get"

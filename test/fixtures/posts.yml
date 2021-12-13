@@ -1,0 +1,12 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+
+#Approve user 's post
+one:
+  id: 1
+  title: Title Post
+  user_id: 1
+
+# two:
+#   title: MyString
+#   user: approve_user

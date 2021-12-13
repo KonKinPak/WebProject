@@ -1,0 +1,7 @@
+<%= form_with(model: @room, remote: true, class: "d-flex mt-4",data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |f| %>
+  <div class="input-group">
+  <%= f.text_field :name, class: "form-control", autocomplete: 'off' ,placeholder: "New group chat.."%>
+  <%= f.submit "New Group",data: { disable_with: false },class: "btn btn-outline-info" %>
+  </div>
+<% end %>
+

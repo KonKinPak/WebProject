@@ -1,0 +1,6 @@
+.card.mb-3{:style => "width:100%;"}
+  .row.g-0
+    .card-body
+      %h6.display-6.fs-3.card-title
+        %a.card-link.card-link-feed{:href => "/rooms/#{room.id}",:method =>"get"}
+          = room.name 

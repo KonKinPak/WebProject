@@ -1,0 +1,6 @@
+.container
+	%h1 Editing user
+	
+	= render 'form'
+	
+	= button_to "Back", request.referrer , method: :get ,class:"btn btn-light mt-2"

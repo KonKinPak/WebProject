@@ -1,0 +1,20 @@
+%nav.navbar.navbar-expand-lg.navbar-light.fixed-top.border-bottom.border-1{:style => "background-color: #ffffff;"}
+  :javascript
+    function searchUser() {
+      var profileUser = document.getElementById("searchText");
+      window.location.href = "/profile/"+profileUser.value;
+      }
+  .container-fluid
+    %a.navbar-brand{:href => "/feed"}
+      %img.d-inline-block.aligSn-text-top{:alt => "", :height => "24", :src => image_path("icon.png"), :width => "30"}
+      small
+    %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarNav", "data-bs-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %form.d-flex.me-2 
+          %input.form-control.w-75.me-2#searchText{"aria-label" => "Search", :placeholder => "Search for user", :type => "search"}/
+          %button.btn.btn-outline-success{:onclick => "searchUser()",:type => "button"} Search
+      .d-flex.justify-content-end
+        %a.btn.btn-info.me-2{:href => main_path}  Login
+        %a.btn.btn-outline-secondary{:href => "/register"}  Register

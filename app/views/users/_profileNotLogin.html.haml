@@ -1,0 +1,25 @@
+- flash.each do |type, msg|
+  .alert.alert-info.alert-dismissible.fade.show{:style => "z-index:9999;"}
+    = msg
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+= render '/nav'
+
+-# Create by
+.header.d-flex.flex-column.justify-content-center.border-bottom.border-2.mt-5
+  .row
+    .col-4.border-end.border-2
+      - if @user.avatar.attached?
+        = image_tag(@user.avatar,style:"height:300px",class:"rounded-circle")
+      - else
+        %img.rounded-circle{:alt => "default avatar",:src =>image_path("default_avatar.png"),:style =>"height:300px"}
+
+    .col-8
+      .header-content
+        %h1
+          = @user.nickname
+        %p.ps-4.pt-4
+          Join at :
+          = @user.created_at.to_date.to_formatted_s(:long_ordinal)
+.container
+  = render 'posts'
+ 

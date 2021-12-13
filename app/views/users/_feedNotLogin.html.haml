@@ -1,0 +1,28 @@
+- flash.each do |type, msg|
+  .alert.alert-info.alert-dismissible.fade.show{:style => "z-index:9999;"}
+    = msg
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+= render '/nav'
+-# Create by
+.header.d-flex.flex-column.justify-content-center.border-bottom.border-2.mt-5
+  .row
+    .col-4.border-end.border-2
+      %img.rounded-circle{:alt => "Creator Image", :src => "https://scontent.fbkk12-3.fna.fbcdn.net/v/t39.30808-6/265073454_4726347077454387_6507384734877505375_n.jpg?_nc_cat=102&_nc_rgb565=1&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeFqCrJHHNmefgyLYD6hkMEAa7H4zOxgysNrsfjM7GDKwxNxwzPkcFZyq0okgLaQL-1hLoq9buB7LUM-2rnyGhiI&_nc_ohc=MLT6tzvMGLwAX_94S3Q&tn=fI66SGmXad46hQMC&_nc_ht=scontent.fbkk12-3.fna&oh=e2c9d5b03f206bf6f7f6318e2604edd3&oe=61B6740D", :height => "300vh"}
+    .col-8
+      .header-content
+        %h1
+          I'm Tiew, the creator of this web
+        %p.ps-4.pt-4
+          Welcome to Small, the web blog referencing from Medium
+          %br
+          %br
+          You need to got approval before login.
+        %p.pt-4
+          Contact Me :
+          %a.ms-2{:href => "mailto:tiewclub9@gmail.com"}
+            %img.email{:alt => "Email Icon", :src =>"https://cdn-icons-png.flaticon.com/512/95/95645.png",:style => "width:42px;height:42px;"}
+
+-# Feed Body
+.container
+  = render 'posts'
+

@@ -1,0 +1,63 @@
+- flash.each do |type, msg|
+  .alert.alert-info.alert-dismissible.fade.show{:style => "z-index:9999;"}
+    = msg
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+
+.row
+  .col-3.position-fixed.border-end.border-2
+    = render '/nav2'
+
+  .col-7.offset-3.ps-5.pe-5
+    .container
+      %h1.display-4 
+        = @post.title
+      %hr/
+      %p.text-muted.fs-4
+        = @post.created_at.to_formatted_s(:short)
+        by
+        %a{:href => profile_user_path(@post.user.nickname),:method =>"get"}
+          = @post.user.nickname
+        |
+        = pluralize(@post.views,"view")
+        |
+        = pluralize(@post.likes.count,"like")
+        |
+        = pluralize(@post.comments.count,"comment")
+      .post_body.fs-3
+        = @post.body
+      - if @post.user_likes.include?(@self_user)
+        = button_to "Unlike", unlike_post_path(@post.id) , method: "POST",class:"btn btn-outline-secondary unlike-btn mt-3 mb-3"
+      - else
+        = button_to "Like", like_post_path(@post.id) , method: "POST" ,class:"btn btn-outline-primary  like-btn mt-3 mb-3"
+      - if @post.likes.count != 0 
+        %a.showUsers{"data-bs-target" => "#Like", "data-bs-toggle" => "modal", :type => "button","dataModal"=> @post.user_likes.to_json}
+          -#----------------number of like------------------
+          = @post.likes.count.to_s + " Likes"
+      .mt-5
+        =render '/comments/form'
+      -if(@post.comments.present?)
+        .mt-5
+          =render 'comments' 
+
+  .col-2.offset-10.position-fixed.border-start.border-2
+    = render '/users/profilebar'
+
+.modal.fade{id: "Like",role: "modal","aria-hidden" => "true","taria-labelledby" => "exampleModalLabel",   :tabindex => "-1"}
+  .modal-dialog.modal-dialog-scrollable
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.w-100.modal-title.text-center User Likes
+        %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type  => "button"}
+      .modal-body
+        .div#mo_body.container{:style => "font-size:25px"}
+
+:javascript
+  $(".showUsers").click(function(){
+    $("#mo_body").empty();
+    var userJson = $(this).attr("dataModal");
+    var userObject = jQuery.parseJSON(userJson);
+    userObject.forEach((user) =>{
+      var link = `<a class = "card-link-feed" href ="/profile/${user.nickname}"> ${user.nickname} </a> <br><hr>`;
+      $("#mo_body").append(link);   
+    })
+  });

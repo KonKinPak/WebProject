@@ -1,0 +1,25 @@
+= form_for @user do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |message|
+          %li= message
+
+  .field.mb-3
+    = f.label :avatar ,{ class: "form-label"}
+    = f.file_field :avatar, { class: "form-control"}
+  .field.mb-3
+    = f.label :username ,{ class: "form-label"}
+    = f.text_field :username , { class: "form-control", placeholder: "Username (Used for log in)"}
+  .field.mb-3
+    = f.label :nickname ,{ class: "form-label"}
+    = f.text_field :nickname , { class: "form-control", placeholder: "Nickname (Showed in system)"}
+  .field.mb-3
+    = f.label :password,{ class: "form-label"}
+    = f.password_field :password , { class: "form-control", placeholder: "Password"}
+  .field.mb-3
+    = f.label :password_confirmation,{ class: "form-label"}
+    = f.password_field :password_confirmation , { class: "form-control", placeholder: "Must be same above"} 
+  .actions
+    = f.submit 'Save' ,class:'btn btn-primary'

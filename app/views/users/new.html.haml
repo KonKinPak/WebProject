@@ -1,0 +1,15 @@
+- flash.each do |type, msg|
+  .alert.alert-info.alert-dismissible.fade.show{:style => "z-index:9999;"}
+    = msg
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+= render '/nav'
+.container
+  %br
+  %br
+  %br
+  %h1 Register User
+
+  = render 'form'
+	
+  = link_to 'Cancel', feed_path
+

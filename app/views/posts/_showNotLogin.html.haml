@@ -1,0 +1,32 @@
+- flash.each do |type, msg|
+  .alert.alert-info.alert-dismissible.fade.show{:style => "z-index:9999;"}
+    = msg
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+= render '/nav'
+.div{:style => "width:100%;height:300px; overflow-y:hidden"}
+  - if @post.banner.attached?
+    = image_tag(@post.banner,style:"width:100%")
+  - else
+    %img{:alt => "default banner",:src =>image_path("default_banner.jpg"),:style =>"width:100%"}
+.container.mt-3
+  .container.mt-2
+    %h1.display-4 
+      = @post.title
+    %hr/
+    %p.text-muted.fs-4
+      = @post.created_at.to_formatted_s(:short)
+      by
+      %a{:href => profile_user_path(@post.user.nickname),:method =>"get"}
+        = @post.user.nickname
+      |
+      = pluralize(@post.views,"view")
+      |
+      = pluralize(@post.likes.count,"like")
+      |
+      = pluralize(@post.comments.count,"comment")
+    .post_body.fs-3
+      = @post.body
+    -if(@post.comments.present?)
+      .mt-5
+        =render 'comments'
+

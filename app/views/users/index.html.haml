@@ -1,0 +1,34 @@
+.container
+  %h1 Listing users
+  
+  %table#myTable.table-striped.display{:style => "width:100%"}
+    %thead
+      %tr
+        %th Id
+        %th Username
+        %th Nickname
+        %th Status
+        %th
+        %th
+        %th
+  
+    %tbody
+      - @users.each do |user|
+        -if(!user.admin && user.status != 2)
+          %tr
+            %td= user.id
+            %td= user.username
+            %td= user.nickname
+            %td= user.status
+            %td= link_to 'Show', user
+            -if(user.status == 0)
+              %td= link_to 'Approve', approve_user_path(user), method: :post
+            -elsif(user.status == 1)
+              %td= link_to 'Ban', ban_user_path(user), method: :post,data: { confirm: 'Are you sure?' }
+            -elsif(user.status == -1)
+              %td= link_to 'UnBan', unban_user_path(user), method: :post,data: { confirm: 'Are you sure?'  }
+            %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+  
+  .d-flex
+    = button_to "Posts", posts_path , method: :get,class:"btn btn-secondary"
+    = button_to "Comments", comments_path , method: :get,class:"btn btn-secondary ms-3 "

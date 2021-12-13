@@ -1,0 +1,51 @@
+- @comments.each do |comment| 
+  -user = comment.user
+  .card.mb-4{:style => "width:100%;"}
+    .row
+      .col-2.ms-auto.me-auto
+        - if user.avatar.attached?
+          = image_tag(user.avatar,:class => "rounded-circle mb-5 mt-5",:style => "width:100px;height:100px; overflow-y:hidden")
+        - else
+          %img.rounded-circle.mb-5.mt-5{:alt => "default avatar",:src =>image_path("default_avatar.png"),:style => "width:100px;height:100px; overflow-y:hidden"} 
+      .col-10.pt-3
+        .d-flex.flex-column.align-items-start
+          %ul.nav.navbar-nav{:id => "comment-#{user.nickname}"}
+            %li.nav-item
+              %a.fs-4{:href => "/profile/#{user.nickname}"}
+                = user.nickname
+            }
+            %li.nav-item
+              %p.text-muted.fs-6
+                = comment.created_at.to_formatted_s(:short)
+            %li.nav-item
+              %p.fs-4
+                = comment.msg
+            %li.nav-item
+              %p.text-muted.fs-5
+                = pluralize(comment.likes.count,"like") 
+            %li.nav-item.mb-3
+              - if comment.user_likes.include?(@self_user)
+                = button_to "Unlike", unlike_comment_path(comment.id) , method: "POST",class:"btn btn-outline-secondary unlike-btn "
+              - else
+                = button_to "Like", like_comment_path(comment.id) , method: "POST" ,class:"btn btn-outline-primary  like-btn "               
+             
+
+.modal.fade{id: "Like",role: "modal","aria-hidden" => "true","taria-labelledby" => "exampleModalLabel",   :tabindex => "-1"}
+  .modal-dialog.modal-dialog-scrollable
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.w-100.modal-title.text-center User Likes
+        %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type  => "button"}
+      .modal-body
+        .div#mo_body.container{:style => "font-size:25px"}
+
+:javascript
+  $(".showUsers").click(function(){
+    $("#mo_body").empty();
+    var userJson = $(this).attr("dataModal");
+    var userObject = jQuery.parseJSON(userJson);
+    userObject.forEach((user) =>{
+      var link = `<a class = "card-link-feed" href ="/profile/${user.nickname}"> ${user.nickname} </a> <br><hr>`;
+      $("#mo_body").append(link);   
+    })
+  });

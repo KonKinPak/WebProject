@@ -1,0 +1,45 @@
+:css
+  #{".msg-#{@current_user&.id}"} {
+  background-color: #007bff !important;
+  padding: 10px;
+  color: white;
+  }
+  #{".cont-#{@current_user&.id}"} {
+  display: flex;
+  justify-content: flex-end
+  }
+.row
+  .col-md-3.position-fixed.border-end.border-2.vh-100{:style => "z-index:9999"}
+    .container-fluid.d-flex.flex-column.align-items-center
+      %a.navbar-brand.m-5{:href => "/feed"}
+        %img.d-inline-block.aligSn-text-top.me-auto.ms-auto{:alt => "", :src => image_path("icon.png"), :width =>   "100px" ,:height => "100px"}
+      %h1.display-5 Chat
+      /tab bar
+      %nav.mt-3.w-100
+        #nav-tab.nav.nav-tabs{:role => "tablist"}
+          %button#nav-home-tab.nav-link.active{"aria-controls" => "nav-home", "aria-selected" => "true", "data-bs-target" => "#nav-home", "data-bs-toggle" => "tab", :role => "tab", :type => "button",:style =>"font-size:20px;width:50%"} Private
+          %button#nav-profile-tab.nav-link{"aria-controls" => "nav-profile", "aria-selected" => "false", "data-bs-target" => "#nav-profile", "data-bs-toggle" => "tab", :role => "tab", :type => "button",:style =>"font-size:20px;width:50%"} Group
+      #nav-tabContent.tab-content
+        #nav-home.tab-pane.fade.show.active{"aria-labelledby" => "nav-home-tab", :role => "tabpanel"}
+          %div{style:"width:372px"}
+            = turbo_stream_from "users"
+            #users.mt-4.overflow-auto{style:"max-height:50vh"}
+              = render @users
+              #infinite-scrolling.digg_pagination.mb-3
+                = will_paginate(@users)
+        #nav-profile.tab-pane.fade{"aria-labelledby" => "nav-profile-tab", :role => "tabpanel"}
+          = render partial: "layouts/new_room_form"
+          %div
+            = turbo_stream_from "rooms"
+            #rooms.mt-4.overflow-auto{style:"max-height:50vh"}
+              = render @rooms
+              #infinite-scrolling.digg_pagination.mb-3
+                = will_paginate(@rooms)
+  .col-md-9.offset-3.vh-100
+    - if @single_room
+      %h2.fs-3.text-center.border-bottom.p-2.mb-3.sticky-lg-top.bg-white
+        = @user&.username || @single_room&.name
+      = turbo_stream_from @single_room
+      #messages.m-2.chat-body
+        = render @messages
+      = render partial: 'layouts/new_message_form'

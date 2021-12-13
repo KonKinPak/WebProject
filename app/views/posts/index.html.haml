@@ -1,0 +1,30 @@
+.container
+  %h1 Listing posts
+  
+  
+  %table#myTable.table-striped.display{:style => "width:100%"}
+    %thead
+      %tr
+        %th Id
+        %th Title
+        %th User_id
+        %th Views
+        %th
+        %th
+        %th
+  
+    %tbody
+      - @posts.each do |post|
+        %tr
+          %td= post.id
+          %td= post.title
+          %td= post.user_id
+          %td= post.views
+          %td= link_to 'Show', post
+          %td= link_to 'Edit', edit_post_path(post)
+          %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
+  
+  
+  .d-flex
+    = button_to "Users", users_path , method: :get,class:"btn btn-secondary"
+    = button_to "Comments", comments_path , method: :get,class:"btn btn-secondary ms-3 "

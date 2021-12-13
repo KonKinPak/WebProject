@@ -1,0 +1,21 @@
+:javascript
+  function searchUser() {
+    var profileUser = document.getElementById("searchText");
+    window.location.href = "/profile/"+profileUser.value;
+    }
+.nav.flex-column.flex-nowrap.vh-100.overflow-auto.text-white.p-2
+  .container-fluid.d-flex.flex-column.align-items-center
+    %a.navbar-brand.m-5{:href => "/feed"}
+      %img.d-inline-block.aligSn-text-top{:alt => "", :src => image_path("icon.png"), :width =>   "100px" ,:height => "100px"}
+    .input-group.w-75.mb-2
+      %input.form-control#searchText{"aria-label" => "Search", :placeholder => "Search for user", :type => "search"}/
+      %button.btn.btn-outline-success{:onclick => "searchUser()",:type => "button"} Search
+    .d-flex.flex-column.align-items-start.mt-5#side
+      %a.navbar-brand{:href => "/chat"}
+        .d-flex.align-items-center
+          %img.pb-2.me-3{:alt => "chat icon", :height => "35px", :src => image_path("chat.png"), :width => "35px"}
+          %h2.display-6 Chat
+      %a.navbar-brand.mt-3{:href => new_post_path}
+        .d-flex.align-items-center
+          %img.pb-2.me-3{:alt => "write icon", :height => "35px", :src => image_path("write.png"), :width => "35px"}
+          %h2.display-6 Write

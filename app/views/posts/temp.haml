@@ -1,0 +1,18 @@
+= render 'nav'
+- @posts.each do |post| 
+  - profile_user_name = User.find(post.user_id).name
+  .card.mt-4{:style => "width: 50vw;"}
+    .card-body.cardPost
+      %h5.card-title
+        %a.card-link.card-link-feed{:href => "/profile/#{profile_user_name}",:method =>"get",:style => "font-size:25px"}= profile_user_name
+      %h6.card-subtitle.mb-2.text-muted= post.created_at.to_formatted_s(:short)
+      %pCard.card-text.fst-italic= post.msg
+      %br
+      - if post.user_likes.include?(@user)
+        = button_to "Unlike", unlike_post_path(post.id) , method: "POST",class:"btn btn-primary unlike-btn mt-2"
+      - else
+        = button_to "Like", like_post_path(post.id) , method: "POST" ,class:"btn btn-secondary  like-btn mt-2"
+      - if post.likes.count != 0 
+        %button.btn.btn-primary.btn-showUser.mt-2.showUsers{"data-bs-target" => "#Like", "data-bs-toggle" => "modal", :type => "button","dataModal": post.user_likes.to_json}
+          -#----------------number of like------------------
+          = post.likes.count.to_s + " Likes"

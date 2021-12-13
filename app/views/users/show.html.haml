@@ -1,0 +1,18 @@
+- flash.each do |type, msg|
+  .alert.alert-info.alert-dismissible.fade.show{:style => "z-index:9999;"}
+    = msg
+    %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "alert", :type => "button"}
+
+.container.d-flex.flex-column.align-items-center
+  - if @user.avatar.attached?
+    = image_tag(@user.avatar,:class => "rounded-circle mb-4 mt-5",:style => "width:200px;height:200px; overflow-y:hidden")
+  - else
+    %img.rounded-circle.mb-4.mt-5{:alt => "default avatar",:src =>image_path("default_avatar.png"),:style => "width:200px;height:200px; overflow-y:hidden"}
+  %p
+    %b Username:
+    = @user.username
+  %p
+    %b Nickname:
+    = @user.nickname
+  
+  = button_to "Ok", feed_path , method: "get" ,class:"btn btn-primary mt-4",style: "font-size:24px;width:100px"

@@ -1,0 +1,7 @@
+.container
+	%h1 Editing post
+	
+	= render 'form'
+	
+	= button_to "Show", @post , method: :get ,class:"btn btn-light mt-2"
+	= button_to "Back", request.referrer , method: :get ,class:"btn btn-light mt-2"

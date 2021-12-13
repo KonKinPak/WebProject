@@ -1,0 +1,30 @@
+#posts.mt-5
+  - @posts.each do |post| 
+    .card.mb-4{:style => "width:100%;"}
+      .row.g-0
+        .col-md-8
+          .card-body
+            %h1.display-5.card-title
+              %a.card-link.card-link-feed{:href => "/posts/#{post.id}",:method =>"get"}
+                = post.title.truncate_words(5)
+            %p.blockquote.card-text
+              = post.body.to_plain_text.truncate_words(50)
+            %p.card-text
+              %small.text-muted 
+                = post.created_at.to_formatted_s(:short)
+                by
+                %a{:href => profile_user_path(post.user.nickname),:method =>"get"}
+                  = post.user.nickname
+                |
+                = pluralize(post.views,"view")
+                |
+                = pluralize(post.likes.count,"like")
+                |
+                = pluralize(post.comments.count,"comment")
+        .col-md-4
+          - if post.banner.attached?
+            = image_tag(post.banner,style:"width:100%;height:300px;overflow-y:hidden")
+          - else
+            %img{:alt => "default banner",:src =>image_path("default_banner.jpg"),:style =>"width:100%;height:300px;overflow-y:hidden"}
+#infinite-scrolling.digg_pagination
+  = will_paginate(@posts)
