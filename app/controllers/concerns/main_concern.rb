@@ -22,6 +22,14 @@ module MainConcern
 		end
 	end
 
+	def is_ban
+		:is_logged_in
+		user = User.find(session[:user_id])
+		if(user.status == -1)
+			redirect_to main_path , alert: "This account was banned. Plase contact admin"
+		end
+	end
+
 	def is_admin
 		:is_logged_in
 		user = User.find(session[:user_id])

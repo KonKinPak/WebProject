@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   include MainConcern
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :is_logged_in, only: %i[index edit update destroy like unlike]
-  before_action :is_admin, only: %i[index]
+  before_action :is_admin, only: %i[index update destroy]
+  before_action :is_ban ,only: %i[like unlike new edit create update]
   # GET /posts or /posts.json
   def index
     @posts = Post.all

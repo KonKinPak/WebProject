@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   require 'will_paginate/array'
   include MainConcern
   before_action :is_logged_in, only: %i[ index create show]
+  before_action :is_ban, only: %i[ index create show]
   def index
     @room = Room.new
     @current_user = User.find(session[:user_id])

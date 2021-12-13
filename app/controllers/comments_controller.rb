@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
   include MainConcern
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :is_logged_in, only: %i[index edit update destroy]
-  before_action :is_admin, only: %i[index]
+  before_action :is_admin, only: %i[index update destroy]
+  before_action :is_ban, only: %i[new like unlike create]
   # GET /comments
   def index
     @comments = Comment.all

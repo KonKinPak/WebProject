@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   include MainConcern
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :is_logged_in, only: %i[ index]
-  before_action :is_admin, only: %i[index]
+  before_action :is_admin, only: %i[index ban approve unban destroy]
+  before_action :is_ban ,only: %i[follow unfollow]
 
   def main
     session[:user_id] = nil
